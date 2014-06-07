@@ -4,7 +4,6 @@
  * config class
 
  */
-require_once 'core/init.php';
 
 class Config {
 	public static function get($path = null){
@@ -14,8 +13,8 @@ class Config {
 			
 			/*loop*/
 			foreach($path as $bit) {
-				if (isset($config[$bit])) {
-					$config = $config[$bit];
+				if (isset($config[$bit])) {//Determine the variables are set and are not NULL http://uk3.php.net/manual/en/function.isset.php
+					$config = $config[$bit];//set $config to the bit that we want
 				}
 			}
 			

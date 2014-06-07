@@ -22,6 +22,7 @@ require_once 'core/init.php'; ?>
         <link href='' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
+        <link rel="shortcut icon" href="opicon.ico" type="image/x-icon" sizes="64x64"/>
         <style>
 			body{background: #e9e6e8;color: #061212; 
 				font-size: 1em;}
@@ -98,9 +99,11 @@ require_once 'core/init.php'; ?>
 							echo '</span>'; ?>
 							<p>
 							<?php echo 'echo random false value foo/bar: <span class="php-output">' . Config::get('foo/bar') . '</span>'; ?>
-							To var_dump 'foo/bar' would reveal the contents of the <code>$GLOBALS['config']</code> variable.
-                            <p>var_dump an empty value returns false: 
+							<br>To var_dump 'foo/bar' would reveal the contents of the <code>$GLOBALS['config']</code> variable.<br>
+								The codebase could be improved to test against this case!
+                            <p>var_dump an empty value only returns false: 
 								<span class="php-output"> <?php var_dump( Config::get('') ); ?></span>
+								 
                             
 						</p>
 					</section>
@@ -115,18 +118,26 @@ require_once 'core/init.php'; ?>
 							echo 'First test: <span class="php-output">';
 							$users = DB::getInstance()->query('SELECT username FROM users');
 							if($users->count()){
-									foreach($users as $user){
-										echo $user->username;
-									}
+									
+										echo 'Query prepared and executed';
+									
 							}
 							echo '</span>';
 							
 							echo '<br>Second Test: <span class="php-output">';
-							$user = DB::getInstance()->query("SELECT username FROM users WHERE username =?", array('jon'));
+							$user = DB::getInstance()->query("SELECT username FROM users WHERE username =?", array('billy'));
+								echo '<br>';
+							if($user->count()){
+									
+								echo 'Found user';
+									
+							} else{
+								echo 'No user found';	
+							}
 							echo '</span>';
 							
 							echo '<br>Third Test: <span class="php-output">';
-							$user = DB::getInstance()->get('users',array('username','=','jon'));
+							$user = DB::getInstance()->get('users',array('username','=','billy'));
 							echo '<br>';
 							if($user->count()){
 									
@@ -138,35 +149,56 @@ require_once 'core/init.php'; ?>
 							echo '</span>';
 							
 							?>
-						<h3>Data</h3> 
-						<p>
-						<?php 
-						echo 'get all users with standard sql query:<br><span class="php-output">';
-						$user = DB::getInstance()->query("SELECT * FROM users");
-						if($user->count()){
-									
-							foreach($users as $user){
-								echo $user->username;
-							}
-						}else{
-								echo 'No user found';	
-							}	
-							
-						echo '</span>';
-						/*echo '<br>Get first result<span class="php-output">';
-							$user = DB::getInstance()->get('users',array('username','=','jon'));
-							echo '<br>';
+						<h3>Read Data</h3> 
+							<p>
+							<?php
+							 
+							echo 'get all users with standard sql query:<br><span class="php-output">';
+							$user = DB::getInstance()->query("SELECT * FROM users");
 							if($user->count()){
-									
-								echo $user->first()->username;
-									
-							} else{
-								echo 'No user found';	
-							}
+										
+								foreach($user->results() as $user){
+									echo $user->username;
+								}
+							}else{
+									echo 'No user found';	
+								}	
+								
 							echo '</span>';
-							* */
-						?>
-					
+							echo '<br>Getting the first result.
+							<span class="php-output">';
+								$user = DB::getInstance()->get('users',array('username','=','billy'));
+								echo '<br>';
+								if($user->count()){
+									echo $user->first()->username;	
+										
+								} else{
+									echo 'No user found';	
+								}
+								echo '</span>';
+								
+							?>
+							<h3>Insert and Update Data</h3>
+							<p>
+								<?php 
+								/*
+								$user = DB::getInstance()->insert('users', array(
+									'username' => 'Dale',
+									'password' => 'unpassword',
+									'salt' => 'basalt',
+									));
+									*/
+								 ?>
+								<?php 
+								
+								$user = DB::getInstance()->update('users',3, array(
+									
+									'password' => 'updatedpassword',
+									
+									));
+									
+								 ?>
+								
 					</section>
 				</article>	
 			</div> <!-- #main -->

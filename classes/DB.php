@@ -1,14 +1,16 @@
 <?php
 /*
  * DB.php
+ * database wrapper
+ * used the PDO class http://uk3.php.net/manual/en/class.pdo.php
  */
 class DB{
-	private static $_instance = null;
+	private static $_instance = null;//_ is notation to denote a private or protected property of the class
 	
 	private $_pdo,
 			$_query,
 			$_error = false,
-			$_results,
+			$_results,//stores results set
 			$_count = 0;
 			
 	private function __construct(){
@@ -23,16 +25,16 @@ class DB{
 	}//end constructor
 	
 	public static function getInstance(){//available outside the class
-			if(!isset(self::$_instance)){
-				self::$_instance = new DB();
+			if(!isset(self::$_instance)){//if database is not instantiated
+				self::$_instance = new DB();//instantiate; will run contructor above
 			}
-			return self::$_instance;
+			return self::$_instance;//if it's already been set, just return existing instance
 	}
 	
 	public function query($sql, $params = array()){
-		$this->_error = false;//reset error to false in case
+		$this->_error = false;//reset error to false, in case there's one from a previous query
 		if($this->_query=$this->_pdo->prepare($sql)){//prepare & test, bind params & execute
-			echo 'Query prepared successfully';
+			//echo 'Query prepared successfully';
 			$pos = 1;
 			if (count($params)){//check parameters exist and bind
 				foreach($params as $param){
@@ -42,9 +44,9 @@ class DB{
 			}
 			//we still execute with no params
 			if($this->_query->execute()){//execute and test
-				echo 'Query successfully executed';
-				$this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);//store results
-				$this->_count = $this->_query->rowCount();//update count
+				//echo 'Query successfully executed';
+				$this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);//store results as a PDO object
+				$this->_count = $this->_query->rowCount();//update count http://uk3.php.net/manual/en/pdostatement.rowcount.php
 			} else{
 				$this->_error = true;
 			}	
@@ -60,8 +62,8 @@ class DB{
 			$operator = $where[1];
 			$value = $where[2];
 			if (in_array($operator,$operators)){
-				//$sql = "SELECT * FROM users WHERE username = 'jon';
-				$sql = "{$action} FROM {$table} WHERE {$field} {$operator} ?";
+				
+				$sql = "{$action} FROM {$table} WHERE {$field} {$operator} ?";//for example, $sql = "SELECT * FROM users WHERE username = 'jon';
 				if (!$this->query($sql, array($value))->error()){
 					return $this;
 				}
@@ -71,19 +73,76 @@ class DB{
 	}
 	
 	public function get($table,$where){
-		return $this->action('SELECT *', $table, $where);
+		return $this->action('SELECT *', $table, $where);//grab everything from the table
 	}
 	
 	public function delete($table,$where){
 		return $this->action('DELETE *', $table, $where);
 	}
 	
+	public function insert($table, $fields = array()){
+		if (count($fields)){
+			/*
+			 * init some basic variables
+			 */
+			$keys = array_keys($fields);//Return all the keys or a subset of the keys of an array - http://uk3.php.net/manual/en/function.array-keys.php
+			$values = null;
+			$x=1;
+			/*
+			 */
+			foreach($fields as $field){
+				$values .= '?';
+				if( $x <  count($fields) ){
+					$values .= ', ';
+				}
+				$x++;
+			}
+			//die($values);
+			$sql = "INSERT INTO users (`". implode('`, `',$keys) ."`) VALUES({$values})" ;
+			if(!$this->query($sql,$fields)->error()){
+				return true;
+			}
+			echo $sql;
+			
+		}
+		return false;
+	}
+	
+	public function update($table, $id, $fields){
+		$set='';
+		$x=1;
+		foreach($fields as $name => $value){
+			$set .= "{$name} = ?";
+			if( $x <  count($fields) ){
+					$set .= ', ';
+				}
+				$x++;
+				
+		}
+		;
+		$sql = "UPDATE {$table} SET {$set} WHERE id = {$id}" ;
+		if(!$this->query($sql,$fields)->error()){
+				return true;
+			}
+		return false;
+		echo $sql;
+	}
+	
 	public function results(){
 		return $this->_results;
 	}
-	/*public function first(){
+	
+	/*this function doesn't seem to work with the version of php running on the test server 
+	 * 
+	 public function first(){
 		return $this->results()[0];
-	}*/
+	}
+	* 
+	*/
+	public function first(){
+	    $data = $this->results();//we can get round this by assigning the results to a variable.
+        return $data[0];
+	}
 	 
 	public function error(){
 		return $this->_error;
