@@ -24,36 +24,7 @@ require_once 'core/init.php'; ?>
         <link rel="stylesheet" href="css/main.css">
         <link rel="shortcut icon" href="opicon.ico" type="image/x-icon" sizes="64x64"/>
         <style>
-			body{background: #e9e6e8;color: #061212; 
-				font-size: 1em;}
-			h1, h2, h3, .php-output{font-family: Roboto, sans-serif;font-weight: 300;}
-			h1{font-size: 1.27em; line-height: 1em;
-				margin-bottom: 1em;}
-			h2{font-size: 1.125em; line-height: 1.2em;
-			margin-top: 1em; margin-bottom: 1em;}
-			h3{font-size: 1em;}
 			
-			h2,h3{font-family: "Gill Sans MT", sans-serif;}
-			.header-container{border-radius: 3em 0; background: #cbc8c9;}
-			.header-container>header>*{display: inline-block;}
-			.title{color: #121212; text-shadow: #061212 0.6px -0.3px 1.6px; letter-spacing: 0.1em; padding: 0 1em;font-size: 1.42em;  line-height: 0.62em;
-  margin-top: 1.9em;
-  margin-bottom: 0.9em;}
-            .subtitle{font-variant: small-caps;!important}
-            .upper{text-transform: uppercase;}
-			.main-container{margin: 0 0.1em 0 0.37em;}
-			.php-output{background: none repeat scroll 0 0 #1f1e1c;
-						border-radius: 0.3em;
-						color: #ebeaee;
-						display: inline-block;
-						font-size: 0.9em;
-						font-weight: normal;
-						margin-top: 0.2em;
-						padding: 0.18em 0.62em;}
-			.dright {float:right; text-align:right;}
-			@media (min-width: 45em){
-				.main-container{margin-left: 1.62em;}
-			}	
 		</style>
 
         <!--[if lt IE 9]>
@@ -110,7 +81,15 @@ require_once 'core/init.php'; ?>
 					<section class="col-1-2">
 						<h2>Database tests</h2>
 						<h3>Test Connection to DB class</h3>
-						<?php DB::getInstance(); ?>
+							<span class="php-output">
+                                <?php if(class_exists('DB')){
+										DB::getInstance();
+                                        echo 'Connected';
+                                      } else{
+                                        echo 'Not connected';
+                                      } ?>
+                             </span>
+
 
 						<h3>Basic method tests</h3>
 						    <p>
@@ -199,6 +178,9 @@ require_once 'core/init.php'; ?>
 									
 								 ?>
 								
+					</section>
+					<section class="col-1-1">
+					<a href="register.php">Proceed to Register</a>
 					</section>
 				</article>	
 			</div> <!-- #main -->
