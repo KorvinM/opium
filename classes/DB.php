@@ -17,7 +17,7 @@ class DB{
 		
 			try {
 				$this->_pdo = new PDO('mysql:host=' . Config::get('mysql/host') . ';dbname=' . Config::get('mysql/db'),Config::get('mysql/username'),Config::get('mysql/password'));
-				//echo 'Connected';
+				//'Connected';
 			} catch(PDOException $e){
 				die($e->getMessage());
 			  }
@@ -28,13 +28,13 @@ class DB{
 			if(!isset(self::$_instance)){//if database is not instantiated
 				self::$_instance = new DB();//instantiate; will run contructor above
 			}
-			return self::$_instance;//if it's already been set, just return existing instance
+			return self::$_instance;//if $_instance has already been set, just return existing instance
 	}
 	
 	public function query($sql, $params = array()){
 		$this->_error = false;//reset error to false, in case there's one from a previous query
 		if($this->_query=$this->_pdo->prepare($sql)){//prepare & test, bind params & execute
-			//echo 'Query prepared successfully';
+	    //'Query prepared successfully';
 			$pos = 1;
 			if (count($params)){//check parameters exist and bind
 				foreach($params as $param){
@@ -44,9 +44,9 @@ class DB{
 			}
 			//we still execute with no params
 			if($this->_query->execute()){//execute and test
-				//echo 'Query successfully executed';
+				//'Query successfully executed';
 				$this->_results = $this->_query->fetchAll(PDO::FETCH_OBJ);//store results as a PDO object
-				$this->_count = $this->_query->rowCount();//update count http://uk3.php.net/manual/en/pdostatement.rowcount.php
+				$this->_count = $this->_query->rowCount();// count te number of results http://uk3.php.net/manual/en/pdostatement.rowcount.php
 			} else{
 				$this->_error = true;
 			}	
@@ -56,14 +56,14 @@ class DB{
 	}//end func query
 	
 	public function action($action,$table,$where = array() ){
-		if (count($where) ===3){
+		if (count($where) ===3){//3 because we need field, operator and value
 			$operators = array('=','>','<','>=','<=');
 			$field = $where[0];
 			$operator = $where[1];
 			$value = $where[2];
 			if (in_array($operator,$operators)){
 				
-				$sql = "{$action} FROM {$table} WHERE {$field} {$operator} ?";//for example, $sql = "SELECT * FROM users WHERE username = 'jon';
+				$sql = "{$action} FROM {$table} WHERE {$field} {$operator} ?";//for example, $sql = "SELECT * FROM users WHERE username = 'jon'. Jon is the value bound to the '?'
 				if (!$this->query($sql, array($value))->error()){
 					return $this;
 				}

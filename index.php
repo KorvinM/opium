@@ -17,15 +17,11 @@ require_once 'core/init.php'; ?>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="stylesheet" href="//brick.a.ssl.fastly.net/Roboto:400">
-        <link href='' rel='stylesheet' type='text/css'>
-        <link href='' rel='stylesheet' type='text/css'>
-        <link href='' rel='stylesheet' type='text/css'>
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/main.css">
-        <link rel="shortcut icon" href="opicon.ico" type="image/x-icon" sizes="64x64"/>
-        <style>
-			
-		</style>
+        <link href='' rel='stylesheet' type='text/css'>
+
+       <link rel="shortcut icon" href="opicon.ico" type="image/x-icon" sizes="88x88"/>
 
         <!--[if lt IE 9]>
             <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
@@ -36,7 +32,7 @@ require_once 'core/init.php'; ?>
 
         <div class="header-container">
             <header class="wrapper clearfix">
-                <h1 class="title upper">OPIUM</h1>
+                <h1 class="upper"><a class="title" href="index.php">OPIUM</a></h1>
                 <h2 class="subtitle"> Object-oriented Php Intuitive User Manager</h2>
                 <!--<nav>
                   <ul>
@@ -82,7 +78,7 @@ require_once 'core/init.php'; ?>
 						<h2>Database tests</h2>
 						<h3>Test Connection to DB class</h3>
 							<span class="php-output">
-                                <?php if(class_exists('DB')){
+                                <?php if(class_exists('DB')){//http://stackoverflow.com/questions/22064419/trying-to-figure-out-how-to-check-if-an-class-has-been-instantiated
 										DB::getInstance();
                                         echo 'Connected';
                                       } else{
@@ -159,24 +155,27 @@ require_once 'core/init.php'; ?>
 							?>
 							<h3>Insert and Update Data</h3>
 							<p>
-								<?php 
-								/*
+							 
+								The code to insert data would be something like:<br> 
+								<code>
 								$user = DB::getInstance()->insert('users', array(
 									'username' => 'Dale',
 									'password' => 'unpassword',
 									'salt' => 'basalt',
-									));
-									*/
-								 ?>
-								<?php 
+									));</code>;
+							
 								
+							 <p>
+								 
+								The following code will update user 3's password:<br>
+								<code>
 								$user = DB::getInstance()->update('users',3, array(
 									
 									'password' => 'updatedpassword',
 									
 									));
-									
-								 ?>
+								</code>	
+							
 								
 					</section>
 					<section class="col-1-1">
