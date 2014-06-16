@@ -5,45 +5,49 @@
  
 require_once 'core/init.php';
 
-var_dump(Token::check(Input::get('token')));
+//var_dump(Token::check(Input::get('token')));
 
 if(Input::exists()){
-	//echo Input::get('username');
-	$validate = new Validate();
-	$validation = $validate->check($_POST, array(
-		'username' => array(
-			'required' => true,
-			'min' => 2,
-			'max' => 18,
-			'unique' => 'users'
-		),
-		'password' => array(
-			'required' => true,
-			'min' => 6
-		),
-		'password_again' => array(
-			'required' => true,
-			'matches' => 'password'
-			
-		),
-		'name' => array(
-			'required' => true,
-			'min' => 2,
-			'max' => 50
-		)
 	
-	));
-	
-	if ($validation->passed()){
-		// register user
-		echo 'You passed';
-	} else{
-		//error output
-		//print_r($validation->errors());
-		foreach ($validation->errors() as $error){
-			echo '<span class="error" style="color: crimson;">'. $error .'</span><br>';
+	//if(Token::check(Input::get('token'))){//this if statement is in the tut but seems to break functionality!, and the checks seem to work without it???
+		
+		//echo 'I have been run <br>'. Input::get('username');
+		$validate = new Validate();
+		$validation = $validate->check($_POST, array(
+			'username' => array(
+				'required' => true,
+				'min' => 2,
+				'max' => 18,
+				'unique' => 'users'
+			),
+			'password' => array(
+				'required' => true,
+				'min' => 6
+			),
+			'password_again' => array(
+				'required' => true,
+				'matches' => 'password'
+				
+			),
+			'name' => array(
+				'required' => true,
+				'min' => 2,
+				'max' => 50
+			)
+		
+		));
+		
+		if ($validation->passed()){
+			// register user
+			echo 'You passed';
+		} else{
+			//error output
+			//print_r($validation->errors());
+			foreach ($validation->errors() as $error){
+				echo '<span class="error" style="color: crimson;">'. $error .'</span><br>';
+			}
 		}
-	}
+	//}end of commented out if statement
 	
 }
 
