@@ -180,6 +180,14 @@ require_once 'core/init.php'; ?>
 					</section>
 					<section class="col-1-1">
 					<a href="register.php">Proceed to Register</a>
+					If registration is successful,  tests run below should output 'You registered successfully' on first return to this page.
+					<?php 
+					if (Session::exists('success')){
+						echo '<p class="php-output flash">';
+						echo Session::flash('success');
+						echo '</p>';
+					} ?>
+				
 					</section>
 				</article>	
 			</div> <!-- #main -->

@@ -39,7 +39,10 @@ if(Input::exists()){
 		
 		if ($validation->passed()){
 			// register user
+			Session::flash('success', 'You registered successfully');
 			echo 'You passed';
+			echo 'Return to <a href="index.php">index</a> to get the flash success message.';
+			//header('Location: index.php');//quick redirect doesn't work
 		} else{
 			//error output
 			//print_r($validation->errors());
