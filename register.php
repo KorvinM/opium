@@ -38,15 +38,36 @@ if(Input::exists()){
 		));
 		
 		if ($validation->passed()){
-			// register user
-			Session::flash('success', 'You registered successfully');
-			echo 'You passed';
-			echo 'Return to <a href="index.php">index</a> to get the flash success message.';
+			echo 'Validation passed. ';
+			
+			$user = new User();//instantiate User class, giving us access to database
+			
+			$salt = Hash::salt(32); //echo $salt; die;//test hash generation
+			
+			
+			try{ // to register user
+				$user->create(array(
+					'username' => Input::get('username'),
+					'password' => Hash::make(Input::get('password'), $salt),
+					'salt' => $salt,//storing the salt is crucial
+					'name' => Input::get('name'),
+					'joined' => date('Y-m-d H:i:s'),
+					'group' => 1
+				));
+				
+				Session::flash('success', 'You registered successfully');//store the flash message under 'success'
+			
+				echo 'Return to <a href="index.php">index</a> to get the flash success message.';
+			
+			} catch(Exception $e){
+				die($e->getMessage);
+			} 
+			
 			//header('Location: index.php');//quick redirect doesn't work
-		} else{
-			//error output
+		} else{ //validation not passed
+			
 			//print_r($validation->errors());
-			foreach ($validation->errors() as $error){
+			foreach ($validation->errors() as $error){//error output
 				echo '<span class="error" style="color: crimson;">'. $error .'</span><br>';
 			}
 		}
