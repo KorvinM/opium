@@ -57,16 +57,4 @@ if(Input::exists()){
 	</article>	
 </div> <!-- #main -->
 
-
-</div> <!-- #main-container -->
-
-        <div class="footer-container">
-            <footer class="wrapper upper">
-         
-            </footer>
-        </div>
-		
-
-        <script src="js/main.js"></script>
-    </body>
-</html>
+<?php include('includes/footer.php');
