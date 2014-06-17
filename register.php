@@ -38,7 +38,7 @@ if(Input::exists()){
 		));
 		
 		if ($validation->passed()){
-			echo 'Validation passed. ';
+			//echo 'Validation passed. ';
 			
 			$user = new User();//instantiate User class, giving us access to database
 			
@@ -56,8 +56,8 @@ if(Input::exists()){
 				));
 				
 				Session::flash('success', 'You registered successfully');//store the flash message under 'success'
-			
-				echo 'Return to <a href="index.php">index</a> to get the flash success message.';
+                Redirect::to('index.php');			
+				//echo 'Return to <a href="index.php">index</a> to get the flash success message.';
 			
 			} catch(Exception $e){
 				die($e->getMessage);
@@ -74,10 +74,7 @@ if(Input::exists()){
 	//}end of commented out if statement
 	
 }
-
-
 ?>
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->

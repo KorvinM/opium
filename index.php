@@ -88,9 +88,15 @@ require_once 'core/init.php'; ?>
 
 
 						<h3>Basic method tests</h3>
-						    <p>
+						    <p>First test: prepare and execute query<br>
+						    <code><pre>$users = DB::getInstance()->query('SELECT username FROM users');
+	if($users->count()){
+		echo 'Query prepared and executed';
+	}</pre>					</code> 
+						    
+						    
 							<?php 
-							echo 'First test: <span class="php-output">';
+							echo '<span class="php-output">';
 							$users = DB::getInstance()->query('SELECT username FROM users');
 							if($users->count()){
 									
@@ -98,8 +104,18 @@ require_once 'core/init.php'; ?>
 									
 							}
 							echo '</span>';
+							?>
 							
-							echo '<br>Second Test: <span class="php-output">';
+							<p>Second Test: look for billy<br>
+							<code><pre>$user = DB::getInstance()->query("SELECT username FROM users WHERE username =?", array('billy'));
+	if($user->count()){
+		echo 'Found user';
+	} else{
+		echo 'No user found';	
+	}</pre>					</code>
+							
+							<?php 
+							echo '<br><span class="php-output">';
 							$user = DB::getInstance()->query("SELECT username FROM users WHERE username =?", array('billy'));
 								echo '<br>';
 							if($user->count()){
@@ -110,8 +126,16 @@ require_once 'core/init.php'; ?>
 								echo 'No user found';	
 							}
 							echo '</span>';
-							
-							echo '<br>Third Test: <span class="php-output">';
+							?>
+							<p>Third Test:get billy<br>
+							<code><pre>$user = DB::getInstance()->get('users',array('username','=','billy'));
+	if($user->count()){
+		echo 'Found user';
+	} else{
+		echo 'No user found';	
+	}</pre>					</code> 
+							<?php
+							echo '<span class="php-output">';
 							$user = DB::getInstance()->get('users',array('username','=','billy'));
 							echo '<br>';
 							if($user->count()){
@@ -125,10 +149,18 @@ require_once 'core/init.php'; ?>
 							
 							?>
 						<h3>Read Data</h3> 
-							<p>
+							<p>get all users with standard sql query:<br>
+							<code><pre>$user = DB::getInstance()->query("SELECT * FROM users");
+	if($user->count()){
+		foreach($user->results() as $user){
+			echo $user->username;
+		}
+		}else{
+			echo 'No user found';	
+	}</pre>					</code>
 							<?php
 							 
-							echo 'get all users with standard sql query:<br><span class="php-output">';
+							echo '<span class="php-output">';
 							$user = DB::getInstance()->query("SELECT * FROM users");
 							if($user->count()){
 										
@@ -139,9 +171,17 @@ require_once 'core/init.php'; ?>
 									echo 'No user found';	
 								}	
 								
-							echo '</span>';
-							echo '<br>Getting the first result.
-							<span class="php-output">';
+							echo '</span>';?>
+							
+							<p>Getting the first 'billy' result.<br>
+							<code><pre>$user = DB::getInstance()->get('users',array('username','=','billy'));
+	if($user->count()){
+		echo $user->first()->username;	
+	} else{
+		echo 'No user found';	
+	}</pre>					</code>
+							<?php
+							echo '<span class="php-output">';
 								$user = DB::getInstance()->get('users',array('username','=','billy'));
 								echo '<br>';
 								if($user->count()){
@@ -154,27 +194,22 @@ require_once 'core/init.php'; ?>
 								
 							?>
 							<h3>Insert and Update Data</h3>
-							<p>
-							 
-								The code to insert data would be something like:<br> 
+							<p>The code to insert data would be something like:<br> 
 								<code>
-								$user = DB::getInstance()->insert('users', array(
-									'username' => 'Dale',
-									'password' => 'unpassword',
-									'salt' => 'basalt',
-									));</code>;
+								<pre>$user = DB::getInstance()->insert('users', array(
+	'username' => 'Dale',
+	'password' => 'unpassword',
+	'salt' => 'basalt',
+	));</pre>					</code>
 							
 								
 							 <p>
 								 
 								The following code will update user 3's password:<br>
 								<code>
-								$user = DB::getInstance()->update('users',3, array(
-									
-									'password' => 'updatedpassword',
-									
-									));
-								</code>	
+								<pre>$user = DB::getInstance()->update('users',3, array(
+	'password' => 'updatedpassword',
+	));</pre>					</code>	
 							
 								
 					</section>
