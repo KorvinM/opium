@@ -156,7 +156,13 @@ h2,h3{font-family: "Gill Sans MT", sans-serif;}
 
 a.title:hover{color: #fdfdfd; text-shadow: #a69299 0.6px -0.3px 2px}
 
-.header-container{border-radius: 3em 0; background: #cbc8c9;}
+.header-container{background: #CBC8C9;
+    border-radius: 2em 0;
+    margin-left: 1px;
+    position: fixed;
+    width: 99.8%;}
+    
+    
 .header-container>header>*{display: inline-block;}
 .title{color: #121212; text-shadow: #061212 0.6px -0.3px 1.6px; letter-spacing: 0.1em; padding: 0 1em;font-size: 1.42em;  line-height: 0.62em; text-decoration: none;
   margin-top: 1.9em;
@@ -178,7 +184,7 @@ a.title:hover{color: #fdfdfd; text-shadow: #a69299 0.6px -0.3px 2px}
 	top: 5px;
 	left: 62%;
 }
-.dright {float:right; text-align:right;}
+.dright {float:right; text-align:right;margin-top: 4.4em}
 
 code{
 	background: #f3f3fc; margin-top: 0.2em;
