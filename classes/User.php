@@ -28,7 +28,7 @@ class User{
 		}
 		
 		
-	}
+	}//end __construct
 	
 	public function create($fields=array()){
 		if(!$this->_db->insert('users',$fields)){
@@ -66,12 +66,16 @@ class User{
 		return false;
 	}
 	
+	public function logout(){
+		Session::delete($this->_sessionName);
+	}
+	
 	public function data(){
 		return $this->_data;
 	}
 	
 	public function isLoggedIn(){
-		//can inlcude other functionality here if desired
+		//can include other functionality here if desired
 		return $this->_isLoggedIn;
 	}
 }
