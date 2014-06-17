@@ -6,11 +6,26 @@
  */
 
 class User{
-	private $_db, $_data, $_sessionName;
+	private $_db, $_data, $_sessionName, $_isLoggedIn;
 	
 	public function __construct($user=null) {
 		$this->_db = DB::getInstance();//set the private property to make use of the database
 		$this->_sessionName = Config::get('session/session_name');
+		if(!$user){
+			if(Session::exists($this->_sessionName)){
+				$user = Session::get($this->_sessionName);
+				
+				if($this->find($user)){
+					$this->_isLoggedIn=true;
+				} else{
+					//process logout
+				} 
+				
+			}
+			
+		} else{
+			$this->find($user);
+		}
 		
 		
 	}
@@ -51,8 +66,13 @@ class User{
 		return false;
 	}
 	
-	private function data(){
+	public function data(){
 		return $this->_data;
+	}
+	
+	public function isLoggedIn(){
+		//can inlcude other functionality here if desired
+		return $this->_isLoggedIn;
 	}
 }
 ?>

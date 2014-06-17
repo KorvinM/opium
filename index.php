@@ -224,10 +224,25 @@ require_once 'core/init.php'; ?>
 						echo '</p>';
 					} ?>
 					<p>
-					
-					<a href="login.php">Login</a>
-					<?php echo '<p class="php-output">Session:'; 
+					Session:
+					<?php echo '<span class="php-output">'; 
 					echo Session::get(Config::get('session/session_name')); 
+					echo '</span>';
+					$user = new User();
+					if($user->isLoggedIn()){
+						echo '<span class="php-output">Logged in</span>';
+					?>
+						<p>Hello <a href="#"><?php echo escape($user->data()->username); ?></a>
+						
+						<ul>
+							<li><a href="logout.php">Log out</a></li>
+							<li></li>
+						</ul>
+					<?php	
+					} else{
+						echo '<span class="php-output">Logged out</span><p>Please <a href="login.php">log in</a> or <a href="register.php">register</a>.</p>';
+					}
+					
 					?>
 					
 				
