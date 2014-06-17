@@ -154,6 +154,12 @@ h3{font-size: 1em;}
 			
 h2,h3{font-family: "Gill Sans MT", sans-serif;}
 
+header.wrapper{
+	font-size: 0.62em;
+}
+
+header.wrapper>*{display: inline-block;}
+
 a.title:hover{color: #fdfdfd; text-shadow: #a69299 0.6px -0.3px 2px}
 
 .header-container{background: #CBC8C9;
@@ -162,8 +168,7 @@ a.title:hover{color: #fdfdfd; text-shadow: #a69299 0.6px -0.3px 2px}
     position: fixed;
     width: 99.8%;}
     
-    
-.header-container>header>*{display: inline-block;}
+ 
 .title{color: #121212; text-shadow: #061212 0.6px -0.3px 1.6px; letter-spacing: 0.1em; padding: 0 1em;font-size: 1.42em;  line-height: 0.62em; text-decoration: none;
   margin-top: 1.9em;
   margin-bottom: 0.9em; transition: 0.16s;}
@@ -184,21 +189,23 @@ a.title:hover{color: #fdfdfd; text-shadow: #a69299 0.6px -0.3px 2px}
 	top: 5px;
 	left: 62%;
 }
-.dright {float:right; text-align:right;margin-top: 4.4em}
+.dright {float:right; text-align:right;font-size: 0.88em;margin-top: 4.4em}
 
 code{
 	background: #f3f3fc; margin-top: 0.2em;
 	padding: 0.18em 0;}
 			
 			
-@media (min-width: 45em){
+@media (min-width: 578px){
+
+	header.wrapper{font-size: 1em;}	
 	.main-container{margin-left: 1.62em;}
 }	
 
 
 
 
-@media handheld, only screen and (min-width: 40em) {
+@media handheld, only screen and (min-width: 960px) {
 /* Content Columns */
 
 .col-1-1 {
