@@ -214,6 +214,7 @@ require_once 'core/init.php'; ?>
 								
 					</section>
 					<section class="col-1-1">
+					<p>
 					<a href="register.php">Proceed to Register</a>
 					If registration is successful,  tests run below should output 'You registered successfully' on first return to this page.
 					<?php 
@@ -222,6 +223,13 @@ require_once 'core/init.php'; ?>
 						echo Session::flash('success');
 						echo '</p>';
 					} ?>
+					<p>
+					
+					<a href="login.php">Login</a>
+					<?php echo '<p class="php-output">Session:'; 
+					echo Session::get(Config::get('session/session_name')); 
+					?>
+					
 				
 					</section>
 				</article>	
