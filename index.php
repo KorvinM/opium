@@ -112,6 +112,7 @@ include('includes/header.php');
 	if($user->count()){
 		foreach($user->results() as $user){
 			echo $user->username;
+			echo ' ';
 		}
 		}else{
 			echo 'No user found';	
@@ -122,6 +123,7 @@ include('includes/header.php');
 					if($user->count()){
 						foreach($user->results() as $user){
 							echo $user->username;
+							echo ' ';
 						}
 					}else{
 						echo 'No user found';	
