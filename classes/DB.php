@@ -89,6 +89,7 @@ class DB{
 			$values = null;
 			$x=1;
 			/*
+			there are quicker ways to achieve the following loop, but this is easier to understand for now
 			 */
 			foreach($fields as $field){
 				$values .= '?';
