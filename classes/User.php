@@ -39,7 +39,7 @@ class User{
 	
 	public function find($user=null){
 		if($user){
-			$field = (is_numeric($user)) ? 'id':'username';
+			$field = (is_numeric($user)) ? 'id':'username';//this idea will fail if the username is numeric, currently allowed! 
 			$data = $this->_db->get('users', array($field, "=", $user));
 			
 			if($data->count()){
