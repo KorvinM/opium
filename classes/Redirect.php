@@ -1,11 +1,11 @@
 <?php
 /*
  * Redirect.php
- * Deals with 404 errors or redirects to a specific pahe,
- * will abstract the header and Redirect functions  in php
- * header('Location:index.php'); //sends a raw HTTP header - http://uk3.php.net/manual/en/function.header.php
- * or
- * Redirect::to(404); //
+ * Takes care of redirects using status codes or to any specific uri
+ * header(); //sends a raw HTTP header - http://uk3.php.net/manual/en/function.header.php
+ * Usage
+ * Redirect::to(404);
+ * Redirect::to('index.php');
  */
  
  class Redirect{
