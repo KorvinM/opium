@@ -19,7 +19,7 @@ if(Input::exists()){
 			//log user in
 			$user = new User();
 			$remember = (Input::get('remember') === 'on') ? true : false;
-			$login = $user->login(Input::get('username'), Input::get('password'));
+			$login = $user->login(Input::get('username'), Input::get('password'), $remember);
 			if($login){
 				Redirect::to('index.php');
 				
