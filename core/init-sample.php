@@ -31,4 +31,19 @@ spl_autoload_register( function($class) {//register the given (anonymous) functi
 
 require_once 'functions.php';//load functions http://uk3.php.net/manual/en/function.require-once.php
 
-?>
+
+/*
+ * check cookie for remember and auto login
+ */
+
+if (Cookie::exists(Config::get('remember/cookie_name')) && !Session::exists(Config::get('session/session_name'))){//Remember Me is in effect	
+	$hash = Cookie::get(Config::get('remember/cookie_name'));
+	$hashCheck = DB::getInstance()->get('users_session', array('hash','=', $hash));
+	
+	if($hashCheck->count()){
+		//Hash matches, log user in
+		$user = new User($hashCheck->first()->user_id);
+		$user->login();
+		
+	} 
+}
