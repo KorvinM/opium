@@ -165,7 +165,7 @@ a.title:hover{color: #fdfdfd; text-shadow: #a69299 0.6px -0.3px 2px}
 .header-container{background: #CBC8C9;
     border-radius: 2em 0;
     margin-left: 1px;
-    position: fixed;
+    position: relative;
     width: 99.8%;}
     
  
