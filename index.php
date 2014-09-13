@@ -7,7 +7,7 @@ require_once 'core/init.php';
 include('includes/header.php');
 
 
-if (Cookie::exists(Config::get('remember/cookie_name')) && !Session::exists(Config::get('session/session_name'))){
+/*if (Cookie::exists(Config::get('remember/cookie_name')) && !Session::exists(Config::get('session/session_name'))){
 	echo 'Remember Me is in effect!!!';	
 	$hash = Cookie::get(Config::get('remember/cookie_name'));
 	$hashCheck = DB::getInstance()->get('users_session', array('hash','=', $hash));
@@ -15,8 +15,8 @@ if (Cookie::exists(Config::get('remember/cookie_name')) && !Session::exists(Conf
 	if($hashCheck->count()){
 		echo 'Hash matches, log user in';
 	} 
-}
-
+}*/
+//^temporay check during development of 'Remember Me' functionality
 
 ?>
 <div class="main wrapper clearfix">

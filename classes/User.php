@@ -55,45 +55,54 @@ class User{
 		return false;
 	}
 	
-	public function login($username=null,$password=null, $remember){
-		
-		$user = $this->find($username);
-		//print_r($this->_data); 
-		if($user) {
-			if($this->data()->password === Hash::make($password,$this->data()->salt)){//'Passwords match!'
-				Session::put($this->_sessionName, $this->data()->id);
-				/* remember
-				 * 
-				 */
-				if($remember){
-					//generate a hash
-					$hash = Hash::unique();
-					//check the hash isn't already in the db
-					$hashCheck = $this->_db->get('users_session',array('user_id', '=', $this->data()->id));
+	public function login($username=null,$password=null, $remember=false){ 
+		if(!$user && !$password && $this->exists()){
+			//log user in
+			Session::put($this->_sessionName, $this->data()->id);
+		} else {
+			$user = $this->find($username);
+			if($user) {
+				if($this->data()->password === Hash::make($password,$this->data()->salt)){//'Passwords match!'
+					Session::put($this->_sessionName, $this->data()->id);
+					/* remember
+					 * 
+					 */
+					if($remember){
+						//generate a hash
+						$hash = Hash::unique();
+						//check the hash isn't already in the db
+						$hashCheck = $this->_db->get('users_session',array('user_id', '=', $this->data()->id));
+						
+						if(!$hashCheck->count()){//insert hash into db
+							$this->_db->insert('users_session', array(
+								'user_id'=>$this->data()->id,
+								'hash' => $hash
+							));
+						} else{
+							$hash = $hashCheck->first()->hash;
+						}
+						//store a cookie
+						Cookie::put($this->_cookieName, $hash, Config::get('remember/cookie_expiry'));
+					} 
 					
-					if(!$hashCheck->count()){//insert hash into db
-						$this->_db->insert('users_session', array(
-							'user_id'=>$this->data()->id,
-							'hash' => $hash
-						));
-					} else{
-						$hash = $hashCheck->first()->hash;
-					}
-					//store a cookie
-					Cookie::put($this->_cookieName, $hash, Config::get('remember/cookie_expiry'));
-				} 
+					return true;
 				
-				return true;
-			
+				}
+				
 			}
-			
-		}
 		
+		}
 		return false;
 	}
 	
+	public function exists(){
+		return (!empty($this->_data)) ? true : false;
+	}
+	
 	public function logout(){
+		$this->_db->delete('users_session', array('user_id','=',$this->data()->id));//delete hash from db
 		Session::delete($this->_sessionName);
+		Cookie::delete($this->_cookieName);
 	}
 	
 	public function data(){
