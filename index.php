@@ -197,6 +197,7 @@ include('includes/header.php');
 			<p>Hello <?php echo escape($user->data()->name); ?>, your username is: <a href="#"><?php echo escape($user->data()->username); ?></a>
 				<ul>
 					<li><a href="update.php">Update details</li>
+					<li><a href="changepass.php">Change password</li>
 					<li><a href="logout.php">Log out</a></li>
 					
 				</ul>

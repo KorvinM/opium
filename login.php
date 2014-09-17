@@ -21,6 +21,7 @@ if(Input::exists()){
 			$remember = (Input::get('remember') === 'on') ? true : false;
 			$login = $user->login(Input::get('username'), Input::get('password'), $remember);
 			if($login){
+				Session::flash('success', 'You are now logged in');
 				Redirect::to('index.php');
 				
 			} else{
