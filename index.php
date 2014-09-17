@@ -194,10 +194,11 @@ include('includes/header.php');
 				if($user->isLoggedIn()){
 					echo '<span class="php-output">Logged in</span>';
 				?>
-			<p>Hello <a href="#"><?php echo escape($user->data()->username); ?></a>
+			<p>Hello <?php echo escape($user->data()->name); ?>, your username is: <a href="#"><?php echo escape($user->data()->username); ?></a>
 				<ul>
+					<li><a href="update.php">Update details</li>
 					<li><a href="logout.php">Log out</a></li>
-					<li></li>
+					
 				</ul>
 				<?php	
 				} else{
