@@ -58,8 +58,11 @@ if (Input::exists()){
 }
 
 ?>
+<div class="main wrapper clearfix">
+	<article class="grid">
+		<section class="col-1-1">
 
-<form action="" method="post">
+			<form action="" method="post">
 				<div>
 					<label for="password_current">Enter your current password:</label>
 					<input type="password" name="password_current" id="password_current">
@@ -79,3 +82,7 @@ if (Input::exists()){
 				
 				
 			</form>
+		</section>
+	</article>
+</div> <!-- #main -->	
+<?php include('includes/footer.php');

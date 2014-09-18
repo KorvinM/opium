@@ -50,17 +50,11 @@ if (Input::exists()){
 		<section class="col-1-4">
 			<form action="" method="post">
 				<div>
-					<label for=""></label>
-					<input type="text"  name="" id="" value="<?php echo escape(Input::get('username')); ?>" autocomplete="off">
-				</div>
-				
-				<div>
 					<label for="name">Change your name:</label>
 					<input type="text"  name="name" id="name" value="<?php echo escape($user->data()->name); ?>">
 					<input type="submit" value="Update">
 					<input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
-				</div>
-				
+				</div>				
 			</form>
 		</section>	
 	</article>	
