@@ -192,21 +192,33 @@ include('includes/header.php');
 				echo '</span>';
 				$user = new User();
 				if($user->isLoggedIn()){
-					echo '<span class="php-output">Logged in</span>';
-				?>
-			<p>Hello <?php echo escape($user->data()->name); ?>, your username is: <a href="#"><?php echo escape($user->data()->username); ?></a>
-				<ul>
+					echo '<span class="php-output">Logged in</span>'; ?>
+					<p>Hello <?php echo escape($user->data()->name); ?>, your username is: <a href="#"><?php echo escape($user->data()->username); ?></a>
+					
+<?php
+				
+					if($user->hasPermission('admin') && $user->hasPermission('moderator')){
+						echo '<p>You are an administrator and a moderator</p>';
+					}  elseif($user->hasPermission('admin')){
+						echo '<p>You are an administrator</p>';
+					} else{
+						echo '<p>You are a standard user.</p>';
+					} ?>
+					
+					<ul>
 					<li><a href="update.php">Update details</li>
 					<li><a href="changepass.php">Change password</li>
 					<li><a href="logout.php">Log out</a></li>
-					
 				</ul>
-				<?php	
+<?php
+					
+						
 				} else{
 					echo '<span class="php-output">Logged out</span><p>Please <a href="login.php">log in</a> or <a href="register.php">register</a>.</p>';
 				}
 					
 				?>
+				
 					
 				
 		</section>
