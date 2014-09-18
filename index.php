@@ -193,7 +193,7 @@ include('includes/header.php');
 				$user = new User();
 				if($user->isLoggedIn()){
 					echo '<span class="php-output">Logged in</span>'; ?>
-					<p>Hello <?php echo escape($user->data()->name); ?>, your username is: <a href="#"><?php echo escape($user->data()->username); ?></a>
+					<p>Hello <?php echo escape($user->data()->name); ?>, your username is: <a href="profile.php?user=<?php echo escape($user->data()->username); ?>"><?php echo escape($user->data()->username); ?></a>
 					
 <?php
 				
