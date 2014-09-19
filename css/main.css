@@ -194,6 +194,10 @@ a.title:hover{color: #fdfdfd; text-shadow: #a69299 0.6px -0.3px 2px}
 code{
 	background: #f3f3fc; margin-top: 0.2em;
 	padding: 0.18em 0;}
+	
+.error{
+	color: crimson;
+}
 			
 			
 @media (min-width: 578px){

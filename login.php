@@ -2,13 +2,11 @@
 /*
  * index.php
  */
- 
 require_once 'core/init.php';
 include('includes/header.php');
 
 if(Input::exists()){
 	if(Token::check(Input::get('token'))){
-		
 		$validate = new Validate();
 		$validation = $validate->check($_POST, array(
 			'username' => array('required' => true),
@@ -16,31 +14,22 @@ if(Input::exists()){
 		));
 		
 		if($validation->passed()){
-			//log user in
 			$user = new User();
 			$remember = (Input::get('remember') === 'on') ? true : false;
-			$login = $user->login(Input::get('username'), Input::get('password'), $remember);
+			$login = $user->login(Input::get('username'), Input::get('password'), $remember);//log user in
 			if($login){
 				Session::flash('success', 'You are now logged in');
 				Redirect::to('index.php');
-				
 			} else{
-				echo 'fail';
+				echo 'Your log-in attempt failed.';
 			}
-			
-			
-		} else{
+		} else{//validation failed
 			foreach ($validation->errors() as $error){//error output
-				echo '<span class="error" style="color: crimson;">'. $error .'</span><br>';
+				echo '<span class="error">'. $error .'</span><br>';
 			}
 		}
-	
 	}
-	
-}
-?>
-
-			
+} ?>
 <div class="main wrapper clearfix">
 	<article class="grid">
 		<form action="" method="post">
@@ -60,9 +49,7 @@ if(Input::exists()){
 			</div>		
 				<input type="hidden" name="token" value="<?php echo Token::generate(); ?>">
 				<input type="submit" value="Log In">
-					
 		</form>
 	</article>	
 </div> <!-- #main -->
-
 <?php include('includes/footer.php');

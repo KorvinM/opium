@@ -3,8 +3,7 @@
  * header.php
  * include for front end pages
  */
-ob_start();
-?>
+ob_start(); ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -33,15 +32,14 @@ ob_start();
         <div class="header-container">
             <header class="wrapper clearfix">
                 <h1 class="upper"><a class="title" href="index.php">OPIUM</a></h1>
-                <h2 class="subtitle"> Object-oriented Php Intuitive User Manager</h2>
+                <h2 class="subtitle"> Object-oriented Php Intantiated User Manager</h2>
                 <!--<nav>
                   <ul>
 				
 					  
 				  </ul>
                 </nav>-->
-                
             </header>
-        </div>
-		<h3 class="dright upper">Application prototype based on a php academy tutorial </h3>
+			<h3 class="dright upper">Application prototype based on a PHP academy tutorial </h3>
+		</div>
         <div class="main-container">

@@ -2,18 +2,14 @@
 /*
  * register.php
  */
- 
 require_once 'core/init.php';
 include('includes/header.php');
-
-
-//var_dump(Token::check(Input::get('token')));
 
 if(Input::exists()){
 	
 	//if(Token::check(Input::get('token'))){//this if statement is in the tut but seems to break functionality!, and the checks seem to work without it???
 		
-	//echo 'I have been run <br>'. Input::get('username');
+		//echo 'I have been run <br>'. Input::get('username');
 	$validate = new Validate();
 	$validation = $validate->check($_POST, array(
 		'username' => array(
@@ -39,13 +35,9 @@ if(Input::exists()){
 	
 	));
 	
-	if ($validation->passed()){//'Validation passed. '
-		
+	if ($validation->passed()){
 		$user = new User();//instantiate User class, giving us access to database
-		
 		$salt = Hash::salt(32); //echo $salt; die;//test hash generation
-		
-		
 		try{ // to register user
 			$user->create(array(
 				'username' => Input::get('username'),
@@ -55,28 +47,22 @@ if(Input::exists()){
 				'joined' => date('Y-m-d H:i:s'),
 				'group' => 1
 			));
-			
 			Session::flash('success', 'You registered successfully');//store the flash message under 'success'
-			Redirect::to('index.php');			
-			//echo 'Return to <a href="index.php">index</a> to get the flash success message.';
-		
+			Redirect::to('index.php');
 		} catch(Exception $e){
 			die($e->getMessage);
 		} 
 		
 		//header('Location: index.php');//quick redirect doesn't work
-	} else{ //validation not passed
-		
-		//print_r($validation->errors());
+	} else{//validation not passed
 		foreach ($validation->errors() as $error){//error output
-			echo '<span class="error" style="color: crimson;">'. $error .'</span><br>';
+			echo '<span class="error">'. $error .'</span><br>';
 		}
 	}
 	//}end of commented out if statement
 
 }
 ?>
-
 <div class="main wrapper clearfix">
 	<article class="grid">
 		<section class="col-1-4">
@@ -106,5 +92,4 @@ if(Input::exists()){
 		</section>	
 	</article>	
 </div> <!-- #main -->
-
 <?php include('includes/footer.php');
