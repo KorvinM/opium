@@ -32,7 +32,7 @@ ob_start(); ?>
         <div class="header-container">
             <header class="wrapper clearfix">
                 <h1 class="upper"><a class="title" href="index.php">OPIUM</a></h1>
-                <h2 class="subtitle"> Object-oriented Php Intantiated User Manager</h2>
+                <h2 class="subtitle"> Object-oriented Php Intuitive User Manager</h2>
                 <!--<nav>
                   <ul>
 				

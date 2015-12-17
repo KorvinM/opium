@@ -1,7 +1,7 @@
 Opium
 =====
 
-Object-oriented PHP Instantiated User Management
+Object-oriented PHP Intuitive User Management
 ------------------------------------------------
 
 Teaching myself.
