@@ -123,12 +123,12 @@ adapted from https://github.com/ThisIsDallas/Simple-Grid
 }
 
 .grid {
-		width: 100%;
-		min-width: 0;
-		margin-left: 0px;
-		margin-right: 0px;
-		padding-left: 0px;
-		padding-right: 0px;
+	width: 100%;
+	min-width: 0;
+	margin-left: 0px;
+	margin-right: 0px;
+	padding-left: 0px;
+	padding-right: 0px;
 	}
 
 .grid:after {
@@ -138,14 +138,17 @@ adapted from https://github.com/ThisIsDallas/Simple-Grid
 }
 
 body{
+	font-family: sans-serif;
 	background: rgb(236,232,204);
 	color: #060606;font-size: 1em;}
 	
 a{color:rgb(138, 26, 4)}
+a:hover{color:rgb(13, 6, 4)}
+a:visited{color:rgb(0, 6, 4)}
 .wrapper{padding:1em}
 
-h1, h2, h3, .php-output{
-	font-family: Roboto, sans-serif;font-weight: 300;}
+h1, .php-output{
+	font-family: Roboto, sans-serif;}
 	
 h1{font-size: 1.27em; line-height: 1em; margin-bottom: 1em;}
 h2{font-size: 1.125em; line-height: 1.2em;margin-top: 1em; margin-bottom: 1em;}
@@ -155,7 +158,7 @@ h2,h3{font-family: "Gill Sans MT", sans-serif;}
 	text-align:center;
 }
 
-header.wrapper>*{display: inline-block;}
+header.wrapper>*, .header-container h3{display: inline-block;font-weight:300;}
 
 
 .header-container{background: rgb(160,185,153);
@@ -183,8 +186,8 @@ header.wrapper>*{display: inline-block;}
 					
 .flash {
 	position: fixed;
-	top: 5px;
-	left: 62%;}
+	top: 10em;
+	}
 
 .dright {
 	float:right;
@@ -198,7 +201,8 @@ code{
 	color: crimson;}
 			
 			
-@media (min-width: 578px){
+@media (min-width: 533px){
+	.flash{top:6em;left:38%;}
 
 }	
 
