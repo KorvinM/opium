@@ -131,10 +131,6 @@ adapted from https://github.com/ThisIsDallas/Simple-Grid
 		padding-right: 0px;
 	}
 
-	
-
-
-
 .grid:after {
 	content: "";
 	display: table;
@@ -145,68 +141,65 @@ body{
 	background: #e9e6e8;
 	color: #061212;font-size: 1em;}
 	
+.wrapper{padding:1em}
+
 h1, h2, h3, .php-output{
 	font-family: Roboto, sans-serif;font-weight: 300;}
 	
 h1{font-size: 1.27em; line-height: 1em; margin-bottom: 1em;}
 h2{font-size: 1.125em; line-height: 1.2em;margin-top: 1em; margin-bottom: 1em;}
 h3{font-size: 1em;}
-			
 h2,h3{font-family: "Gill Sans MT", sans-serif;}
-
-header.wrapper{
-	font-size: 0.62em;
+.header--main{
+	text-align:center;
 }
 
 header.wrapper>*{display: inline-block;}
 
-a.title:hover{color: #fdfdfd; text-shadow: #a69299 0.6px -0.3px 2px}
 
 .header-container{background: #CBC8C9;
     border-radius: 2em 0;
-    margin-left: 1px;
     position: relative;
-    width: 99.8%;}
+    }
     
- 
-.title{color: #121212; text-shadow: #061212 0.6px -0.3px 1.6px; letter-spacing: 0.1em; padding: 0 1em;font-size: 1.42em;  line-height: 0.62em; text-decoration: none;
-  margin-top: 1.9em;
-  margin-bottom: 0.9em; transition: 0.16s;}
+.title{
+	color: #121212; text-shadow: #061212 0.6px -0.3px 1.6px;
+	letter-spacing: 0.1em; font-size: 1.42em;line-height: 0.62;
+	margin-top: 1.9em;margin-bottom: 0.9em; 
+	text-decoration: none; transition: 0.16s;}
+.title:hover{color: #fdfdfd; text-shadow: #a69299 0.6px -0.3px 2px}
 .subtitle{font-variant: small-caps;!important}
 .upper{text-transform: uppercase;}
-.main-container{margin: 0 0.1em 0 0.37em;}
-.php-output{background: none repeat scroll 0 0 #1f1e1c;
-						border-radius: 0.3em;
-						color: #ebeaee;
-						display: inline-block;
-						font-size: 0.9em;
-						font-weight: normal;
-						margin-top: 0.2em;
-						padding: 0.18em 0.62em;}
-						
+.php-output{
+	background: none repeat scroll 0 0 #1f1e1c;
+	border-radius: 0.3em;
+	color: #ebeaee;
+	display: inline-block;
+	font-size: 0.9em;
+	font-weight: normal;
+	margin-top: 0.2em;
+	padding: 0.18em 0.62em;}
+					
 .flash {
 	position: fixed;
 	top: 5px;
-	left: 62%;
-}
-.dright {float:right; text-align:right;margin-top: 4.4em}
+	left: 62%;}
+
+.dright {
+	float:right;
+	text-align:right;}
 
 code{
 	background: #f3f3fc; margin-top: 0.2em;
 	padding: 0.18em 0;}
 	
 .error{
-	color: crimson;
-}
+	color: crimson;}
 			
 			
 @media (min-width: 578px){
 
-	header.wrapper{font-size: 1em;}	
-	.main-container{margin-left: 1.62em;}
 }	
-
-
 
 
 @media handheld, only screen and (min-width: 960px) {
@@ -313,22 +306,6 @@ code{
 }
 	
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 /* ==========================================================================
    Helper classes

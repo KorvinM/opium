@@ -30,7 +30,7 @@ ob_start(); ?>
     <body>
 
         <div class="header-container">
-            <header class="wrapper clearfix">
+            <header class="wrapper clearfix header--main">
                 <h1 class="upper"><a class="title" href="index.php">OPIUM</a></h1>
                 <h2 class="subtitle"> Object-oriented Php Intuitive User Manager</h2>
                 <!--<nav>
@@ -40,6 +40,6 @@ ob_start(); ?>
 				  </ul>
                 </nav>-->
             </header>
-			<h3 class="dright upper">Application prototype based on a PHP academy tutorial </h3>
+			<h3 class="dright">Application prototype based on a PHP academy tutorial </h3>
 		</div>
         <div class="main-container">
