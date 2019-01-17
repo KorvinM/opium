@@ -17,21 +17,22 @@ include('includes/header.php'); ?>
 				<p>
 					<?php echo 'Cookie expiry time. echo: <span class="php-output">' . Config::get('remember/cookie_expiry') . '</span>';
 					echo ' var_dump: <span class="php-output">';
-					var_dump(Config::get('remember/cookie_expiry')); 
+					var_dump(Config::get('remember/cookie_expiry'));
 					echo '</span>'; ?>
 				<p>
 					<?php echo 'session name. echo: <span class="php-output">' . Config::get('session/session_name') . '</span>';
 					echo ' var_dump: <span class="php-output">';
-					var_dump(Config::get('session/session_name')); 
+					var_dump(Config::get('session/session_name'));
 					echo '</span>'; ?>
 				<p>
-					<?php echo 'echo random false value foo/bar: <span class="php-output">' . Config::get('foo/bar') . '</span>'; ?>
-					<br>To var_dump 'foo/bar' would reveal the contents of the <code>$GLOBALS['config']</code> variable.<br>
-					The codebase could be improved to against this case!
-				<p>var_dump an empty value only returns false: 
+					<?php echo 'var_dump random false value foo/bar: <span class="php-output">';
+				  var_dump(Config::get('foo/bar'));
+					echo '</span>';
+					?>
+				<p>var_dump an empty value only returns false:
 					<span class="php-output"> <?php var_dump( Config::get('') ); ?>
 					</span>
-			</div>						 
+			</div>
         </section>
 		<section class="tests db">
 			<div class="col-1-1">
@@ -54,30 +55,30 @@ include('includes/header.php'); ?>
 if($users->count()){
 	echo 'Query prepared and executed';
 }</pre></code>
-				<?php 
+				<?php
 					echo '<span class="php-output">';
 					$users = DB::getInstance()->query('SELECT username FROM users');
-						if($users->count()){
-							echo 'Query prepared and executed';
-						}
+					if($users->count()){
+						echo 'Query prepared and executed';
+					}
 					echo '</span>';
 				?>
-							
+
 			<p>Second Test: look for billy<br>
 				<code><pre>$user = DB::getInstance()->query("SELECT username FROM users WHERE username =?", array('billy'));
 if($user->count()){
 	echo 'Found user';
 } else{
-	echo 'No user found';	
+	echo 'No user found';
 }</pre></code>
-				<?php 
+				<?php
 					echo '<span class="php-output">';
 					$user = DB::getInstance()->query("SELECT username FROM users WHERE username =?", array('billy'));
 					if($user->count()){
 						echo 'Found user';
-									
+
 					} else{
-						echo 'No user found';	
+						echo 'No user found';
 					}
 					echo '</span>';
 				?>
@@ -86,22 +87,22 @@ if($user->count()){
 if($user->count()){
 	echo 'Found user';
 } else{
-	echo 'No user found';	
-}</pre></code> 
+	echo 'No user found';
+}</pre></code>
 				<?php
 					echo '<span class="php-output">';
 					$user = DB::getInstance()->get('users',array('username','=','billy'));
 					if($user->count()){
 						echo 'Found user';
 					} else{
-						echo 'No user found';	
+						echo 'No user found';
 					}
 					echo '</span>';
 				?>
 			</div>
-			
-			<div class="col-1-2">	
-			<h3>Read Data</h3> 
+
+			<div class="col-1-2">
+			<h3>Read Data</h3>
 			<p>get all users with standard sql query:<br>
 				<code><pre>$user = DB::getInstance()->query("SELECT * FROM users");
 if($user->count()){
@@ -110,7 +111,7 @@ if($user->count()){
 		echo ' ';
 	}
 	}else{
-		echo 'No user found';	
+		echo 'No user found';
 }</pre></code>
 				<?php
 					echo '<span class="php-output">';
@@ -121,43 +122,43 @@ if($user->count()){
 							echo ' ';
 						}
 					}else{
-						echo 'No user found';	
-					}	
+						echo 'No user found';
+					}
 					echo '</span>'; ?>
-							
+
 			<p>Getting the first 'billy' result.<br>
 				<code><pre>$user = DB::getInstance()->get('users',array('username','=','billy'));
 if($user->count()){
-	echo $user->first()->username;	
+	echo $user->first()->username;
 } else{
-	echo 'No user found';	
+	echo 'No user found';
 }</pre></code>
 				<?php
 					echo '<span class="php-output">';
 					$user = DB::getInstance()->get('users',array('username','=','billy'));
 					if($user->count()){
-						echo $user->first()->username;	
+						echo $user->first()->username;
 					} else{
-						echo 'No user found';	
+						echo 'No user found';
 					}
 					echo '</span>';
 				?>
-				
+
 			</div>
-			<div class="col-1-2">	
+			<div class="col-1-2">
 			<h3>Insert and Update Data</h3>
-			<p>The code to insert data would be something like:<br> 
+			<p>The code to insert data would be something like:<br>
 				<code><pre>$user = DB::getInstance()->insert('users', array(
 	'username' => 'Dale',
 	'password' => 'unpassword',
 	'salt' => 'basalt'
 ));</pre></code>
-							
+
 			<p>The following code will update user 3's password:<br>
 				<code><pre>$user = DB::getInstance()->update('users',3, array(
 	'password' => 'updatedpassword',
-));</pre></code>	
-	</div>	
+));</pre></code>
+	</div>
 		</section>
 	</article>
 </div> <!-- #main -->
